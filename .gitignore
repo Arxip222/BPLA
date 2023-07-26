@@ -1,0 +1,12 @@
+.GROUND/Objects/*
+.GROUND/Listings/*
+.GROUND/DebugConfig/*
+.AIR/Objects/*
+.AIR/Listings/*
+.AIR/DebugConfig/*
+.BPLA_AIR.uvguix.Arhip
+.BPLA_GROUND.uvguix.Arhip
+.GROUND/EventRecorderStub.scvd
+.AIR/EventRecorderStub.scvd
+.BPLA_AIR.uvoptx
+.BPLA_GROUND.uvoptx
