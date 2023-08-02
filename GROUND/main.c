@@ -7,8 +7,8 @@
 		PORTS_INIT();
 		SysTick_INIT();
 		ADC_DMA_INIT();
-		SPI_INIT();
-		/*TIMERS_PWM_INIT();
+		/*SPI_INIT();
+		TIMERS_PWM_INIT();
 		LCD_INIT();
 		setPos(0,0);
 		delay_ms(200);
@@ -19,11 +19,10 @@
 		
 		while(1)
 		{	
-			x = adc_buffer[0];//Стик OX
+			/*x = adc_buffer[0];//Стик OX
 			y = adc_buffer[1];//Стик ОY
 			speed = adc_buffer[2];//Значение скорости
-			SPI_SEND(x);
+			SPI_SEND(x);*/
 			toggle();
-			delay_ms(300);
 		}
 	}

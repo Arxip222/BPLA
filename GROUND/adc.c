@@ -8,7 +8,7 @@ void ADC_DMA_INIT(void)
 		DMA1_Channel1->CPAR = (uint32_t)&(ADC1->DR);
 		DMA1_Channel1->CMAR = (uint32_t)&adc_buffer;
 		DMA1_Channel1->CNDTR = ADC_BUFFER_SIZE;
-		DMA1_Channel1->CCR |= DMA_CCR1_PL;
+		DMA1_Channel1->CCR |= DMA_CCR1_PL_1; //Priority VERY HIGH, changed to HGIH
 		DMA1_Channel1->CCR &= ~DMA_CCR1_DIR;
 		DMA1_Channel1->CCR |= DMA_CCR1_CIRC;
 		DMA1_Channel1->CCR |= DMA_CCR1_PSIZE_0;
