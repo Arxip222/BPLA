@@ -8,7 +8,7 @@ void ADC_DMA_INIT(void)
 		DMA1_Channel1->CPAR = (uint32_t)&(ADC1->DR);
 		DMA1_Channel1->CMAR = (uint32_t)&adc_buffer;
 		DMA1_Channel1->CNDTR = ADC_BUFFER_SIZE;
-		DMA1_Channel1->CCR |= DMA_CCR1_PL_1; //Priority VERY HIGH, changed to HGIH
+		DMA1_Channel1->CCR &= ~DMA_CCR1_PL; //LOW priority
 		DMA1_Channel1->CCR &= ~DMA_CCR1_DIR;
 		DMA1_Channel1->CCR |= DMA_CCR1_CIRC;
 		DMA1_Channel1->CCR |= DMA_CCR1_PSIZE_0;
@@ -26,8 +26,8 @@ void ADC_DMA_INIT(void)
 		ADC1->CR1 &= ~ADC_CR1_EOCIE; //Interrupt disable
 		ADC1->CR1 &= ~ADC_CR1_AWDIE; //Watchdog interrupt disable
 		ADC1->CR1 &= ~ADC_CR1_JEOCIE; //Injected channels interrupt disable
-		ADC1->CR1 |= ADC_CR1_SCAN; //Scan mode enable
-		ADC1->CR1 &= ~ADC_CR1_AWDSGL; //Analog watchgod disabled
+		ADC1->CR1 &= ~ADC_CR1_SCAN; //Scan mode disable
+		ADC1->CR1 &= ~ADC_CR1_AWDSGL; //Analog watchgod disable
 		ADC1->CR1 &= ~ADC_CR1_JAUTO; //Automatic injected group disable
 		ADC1->CR1 &= ~ADC_CR1_DISCEN; //Discontinuous mode disable
 		ADC1->CR1 &= ~ADC_CR1_JDISCEN; // Discontinuius mode for injected disable

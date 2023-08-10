@@ -2,7 +2,7 @@
 void delay_ms(uint32_t ms)
 {
 		SysTick_CNT = ms;
-		while (SysTick_CNT){}
+		while (SysTick_CNT > 0){}
 }
 
 void delay_us(uint32_t us)

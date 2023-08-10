@@ -24,5 +24,6 @@
 			speed = adc_buffer[2];//Значение скорости
 			SPI_SEND(x);*/
 			toggle();
+			//SPI_SEND(adc_buffer[0]);
 		}
 	}
