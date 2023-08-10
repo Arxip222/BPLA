@@ -17,7 +17,7 @@ void ADC_DMA_INIT(void)
 		DMA1_Channel1->CCR &= ~DMA_CCR1_MSIZE_1;
 		DMA1_Channel1->CCR &= ~DMA_CCR1_TCIE;
 		DMA1_Channel1->CCR &= ~DMA_CCR1_HTIE;
-		DMA1_Channel1->CCR |= DMA_CCR1_TEIE;
+		DMA1_Channel1->CCR &= ~DMA_CCR1_TEIE;
 		DMA1_Channel1->CCR |= DMA_CCR1_MINC;
 		DMA1_Channel1->CCR |= DMA_CCR1_EN;
 		NVIC_EnableIRQ(DMA1_Channel1_IRQn);

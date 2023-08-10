@@ -7,9 +7,8 @@
 		PORTS_INIT();
 		SysTick_INIT();
 		ADC_DMA_INIT();
-		/*SPI_INIT();
-		TIMERS_PWM_INIT();
-		LCD_INIT();
+		SPI_INIT();
+		/*LCD_INIT();
 		setPos(0,0);
 		delay_ms(200);
 		sendbyte(0x2A, 0);
@@ -24,6 +23,6 @@
 			speed = adc_buffer[2];//Значение скорости
 			SPI_SEND(x);*/
 			toggle();
-			//SPI_SEND(adc_buffer[0]);
+			SPI_SEND(adc_buffer[0]);
 		}
 	}
