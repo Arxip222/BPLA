@@ -5,7 +5,7 @@
 		uint16_t y = 0;
 		uint16_t speed = 0;
 		PORTS_INIT();
-		SysTick_INIT();
+		TIM2_INIT();
 		ADC_DMA_INIT();
 		/*SPI_INIT();
 		TIMERS_PWM_INIT();

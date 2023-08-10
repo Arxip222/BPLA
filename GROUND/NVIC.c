@@ -1,13 +1,5 @@
 #include "NVIC.h"
 
-	void SysTick_Handler(void)
-	{
-		if (SysTick_CNT > 0) {
-        SysTick_CNT--;
-    }
-	}
-	
-
 	void ADC1_2_IRQHandler(void) 
 	{
 		/*

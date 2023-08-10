@@ -1,20 +1,19 @@
 #include "serv.h"
 void delay_ms(uint32_t ms)
 {
-		SysTick_CNT = ms;
-		while (SysTick_CNT > 0){}
+		uint32_t start = TIM2->CNT;  // Получаем текущее значение таймера
+
+    while ((TIM2->CNT - start) < ms) {}
 }
 
 void delay_us(uint32_t us)
 {
-	uint32_t startTick = SysTick->VAL;
-  uint32_t endTick = startTick - (us * (SystemCoreClock / 1000000));
-   if (endTick > startTick) 
-	 {
-			while (SysTick->VAL > endTick) {}
-   }
+	uint32_t start = TIM2->CNT;  // Получаем текущее значение таймера
 
-   while (SysTick->VAL < endTick) {}
+    // Вычисляем количество тактов для задержки в микросекундах
+    uint32_t delayTicks = (SystemCoreClock / 1000000) * us;
+
+    while ((TIM2->CNT - start) < delayTicks) {}
 }
 
 void toggle(void) 

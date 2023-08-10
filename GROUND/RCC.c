@@ -1,15 +1,16 @@
 #include "RCC.h"
 
-	
-uint32_t SysTick_CNT;
-
-	void SysTick_INIT(void)
+	void TIM2_INIT(void)
 	{
-		 SysTick->LOAD = SystemCoreClock / 1000 - 1; // Загрузка значения для 1 мс
-    SysTick->VAL = 0; // Сброс текущего значения
-    SysTick->CTRL = SysTick_CTRL_CLKSOURCE_Msk |   // Использовать тактирование от шины CPU
-                    SysTick_CTRL_TICKINT_Msk   |   // Разрешить генерацию прерывания
-                    SysTick_CTRL_ENABLE_Msk;   // Включение прерывания от таймера
-		NVIC_EnableIRQ(SysTick_IRQn);
+    // Включение тактирования для TIM2
+    RCC->APB1ENR |= RCC_APB1ENR_TIM2EN;
+
+    // Настройка предделителя и периода
+    // Таймер будет считать миллисекунды и период будет равен 1 миллисекунде
+    TIM2->PSC = (SystemCoreClock / 1000) - 1;
+    TIM2->ARR = 1;
+
+    // Включение таймера
+    TIM2->CR1 |= TIM_CR1_CEN;
 	}
 	
