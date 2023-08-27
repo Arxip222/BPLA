@@ -11,4 +11,3 @@ uint32_t SysTick_CNT;
     SysTick->CTRL |= SysTick_CTRL_TICKINT_Msk; // ¬ключение прерывани€ от таймера
 		NVIC_EnableIRQ(SysTick_IRQn);
 	}
-	

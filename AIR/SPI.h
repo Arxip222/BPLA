@@ -4,4 +4,5 @@
 #include "serv.h"
 
 void SPI_INIT(void);
+void SPI_RECEIVE(uint16_t data);
 #endif

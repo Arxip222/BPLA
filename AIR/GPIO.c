@@ -3,70 +3,45 @@
 void PORTS_INIT(void) 
 	{
 		RCC->APB2ENR |= RCC_APB2ENR_IOPAEN;
-		RCC->APB2ENR |= RCC_APB2ENR_IOPBEN;
-		RCC->APB2ENR |= RCC_APB2ENR_ADC1EN;
-		RCC->AHBENR |= RCC_AHBENR_DMA1EN;
+		RCC->APB2ENR |= RCC_APB2ENR_IOPCEN;
 		RCC->APB2ENR |= RCC_APB2ENR_SPI1EN;
 		RCC->APB2ENR |= RCC_APB2ENR_AFIOEN;
 		RCC->APB1ENR |= RCC_APB1ENR_TIM2EN;
 		
 		/*
-		PA0, PA1, PA2 -- ADC output
+		PA0, PA1, PA2 -- PWM output
 		
-		PA0 - Speed
-		PA1, PA2 - Stick (OX, OY)
+		PA0 - Servo1
+		PA1 - Servo2
+		PA2 - MOTOR
 		
-		PB0, PB1, PA4-PA7 -- LCD display
-		
-		PB0 - A0
-		PB1 - E
-		PA4-PA7 - Data outputs
-		
-		SPIx_SCK - Master PB3 (Alternate fucntion push-pull)
-		SPIx_MOSI - Full duplex PB5 (Alternate function push-pull
-		SPIx_MISO - Full duplex PB4 (Input floating / Input pull-up) 
-		SPIx_NSS - Software PA15 (General output push-pull) 
-		DIO0 - PB3 (General output push-pull) 
-		RST - PB2 (General output push-pull) 
+		SPIx_SCK - Master PA5 (Alternate fucntion push-pull)
+		SPIx_MOSI - Full duplex PA7 (Alternate function push-pull
+		SPIx_MISO - Full duplex PA6 (Input floating / Input pull-up) 
+		SPIx_NSS - Software PA4 (General output push-pull) 
+		DIO0 - PB0 (General output push-pull) 
+		RST - PB1 (General output push-pull) 
 		*/
-		GPIOB->CRL |= GPIO_CRL_MODE3;
-		GPIOB->CRL &= ~GPIO_CRL_CNF3;
-		GPIOB->CRL |= GPIO_CRL_CNF3_1;
+		GPIOA->CRL |= GPIO_CRL_MODE5;
+		GPIOA->CRL &= ~GPIO_CRL_CNF5;
+		GPIOA->CRL |= GPIO_CRL_CNF5_1;
 		
-		GPIOB->CRL |= GPIO_CRL_MODE5;
-		GPIOB->CRL &= ~GPIO_CRL_CNF5;
-		GPIOB->CRL |= GPIO_CRL_CNF5_1;
+		GPIOA->CRL |= GPIO_CRL_MODE7;
+		GPIOA->CRL &= ~GPIO_CRL_CNF7;
+		GPIOA->CRL |= GPIO_CRL_CNF7_1;
 		
-		GPIOB->CRL &= ~GPIO_CRL_MODE4;
-		GPIOB->CRL &= ~GPIO_CRL_CNF4;
-		GPIOB->CRL |= GPIO_CRL_CNF4_0;
+		GPIOA->CRL &= ~GPIO_CRL_MODE6;
+		GPIOA->CRL &= ~GPIO_CRL_CNF6;
+		GPIOA->CRL |= GPIO_CRL_CNF6_0;
 		
-		GPIOA->CRH |= GPIO_CRH_MODE15;
-		GPIOA->CRH &= ~GPIO_CRH_CNF15;
-		GPIOB->CRL |= GPIO_CRL_MODE2;
-		GPIOB->CRL &= ~GPIO_CRL_CNF2;
-		GPIOB->CRL |= GPIO_CRL_MODE3;
-		GPIOB->CRL &= ~GPIO_CRL_CNF3;
+		GPIOA->CRL |= GPIO_CRL_MODE4;
+		GPIOA->CRL &= ~GPIO_CRL_CNF4;
+		
+		GPIOB->CRL |= GPIO_CRL_MODE0;
+		GPIOB->CRL &= ~GPIO_CRL_CNF0;
+		GPIOB->CRL |= GPIO_CRL_MODE1;
+		GPIOB->CRL &= ~GPIO_CRL_CNF1;
 
 		GPIOC->CRH &= ~GPIO_CRH_CNF13;
     GPIOC->CRH |= GPIO_CRH_MODE13;
-		
-		
-		
-		AFIO->MAPR |= AFIO_MAPR_SPI1_REMAP;
-		
-		
-		GPIOA->CRL &= ~(GPIO_CRL_CNF0 | GPIO_CRL_MODE0 | GPIO_CRL_CNF1 | GPIO_CRL_MODE1 | GPIO_CRL_MODE2 | GPIO_CRL_CNF2);
-		GPIOB->CRL &= ~(GPIO_CRL_CNF0 | GPIO_CRL_MODE0);
-		GPIOB->CRL |= GPIO_CRL_MODE0_0;
-		GPIOB->CRL &= ~(GPIO_CRL_CNF1 | GPIO_CRL_MODE1);
-		GPIOB->CRL |= GPIO_CRL_MODE1_0;
-		GPIOA->CRL &= ~(GPIO_CRL_CNF4 | GPIO_CRL_MODE4);
-		GPIOA->CRL |= GPIO_CRL_MODE4_0;
-		GPIOA->CRL &= ~(GPIO_CRL_CNF5 | GPIO_CRL_MODE5);
-		GPIOA->CRL |= GPIO_CRL_MODE5_0;
-		GPIOA->CRL &= ~(GPIO_CRL_CNF6 | GPIO_CRL_MODE6);
-		GPIOA->CRL |= GPIO_CRL_MODE6_0;
-		GPIOA->CRL &= ~(GPIO_CRL_CNF7 | GPIO_CRL_MODE7);
-		GPIOA->CRL |= GPIO_CRL_MODE7_0;
 	}

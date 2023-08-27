@@ -2,5 +2,7 @@
 
 	void SysTick_Handler(void)
 	{
-		SysTick_CNT++;
+		if (SysTick_CNT > 0) {
+        SysTick_CNT--;
+    }
 	}

@@ -22,3 +22,10 @@ void SPI_INIT(void)
 		SPI1->CR2 &= ~SPI_CR2_RXNEIE;
 		SPI1->CR2 &= ~SPI_CR2_TXEIE;
 	}
+
+void SPI_RECEIVE(uint16_t data) {
+	
+    while (!(SPI1->SR & SPI_SR_TXE));
+
+    SPI1->DR = data;
+}
