@@ -3,6 +3,14 @@
 
 #include "stm32f10x.h"
 #include "RCC.h"
+#include "GPIO.h"
+#include "SPI.h"
+#include "adc.h"
+#include "lcd.h"
+#include "RCC.h"
+#include "NVIC.h"
+#include "SX1278.h"
+#include "SX1278_hw.h"
 
 #define SYSLOCK 72000000U
 #define E1 GPIOB->BSRR = GPIO_BSRR_BS1

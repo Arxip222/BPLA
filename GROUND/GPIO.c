@@ -30,25 +30,26 @@ void PORTS_INIT(void)
 		SPIx_MOSI - Full duplex PB5 (Alternate function push-pull
 		SPIx_MISO - Full duplex PB4 (Input floating / Input pull-up) 
 		SPIx_NSS - Software PA15 (General output push-pull) 
-		DIO0 - PB6 (General output push-pull) 
+		DIO0 - PB6 (Input floating) 
 		RST - PB7 (General output push-pull) 
 		*/
+		GPIOB->CRL &= ~(GPIO_CRL_MODE3 | GPIO_CRL_CNF3);
 		GPIOB->CRL |= GPIO_CRL_MODE3;
-		GPIOB->CRL &= ~GPIO_CRL_CNF3;
 		GPIOB->CRL |= GPIO_CRL_CNF3_1;
 		
+		GPIOB->CRL &= ~(GPIO_CRL_MODE5 | GPIO_CRL_CNF5);
 		GPIOB->CRL |= GPIO_CRL_MODE5;
-		GPIOB->CRL &= ~GPIO_CRL_CNF5;
 		GPIOB->CRL |= GPIO_CRL_CNF5_1;
 		
-		GPIOB->CRL &= ~GPIO_CRL_MODE4;
-		GPIOB->CRL &= ~GPIO_CRL_CNF4;
+		GPIOB->CRL &= ~(GPIO_CRL_MODE4 | GPIO_CRL_CNF4);
 		GPIOB->CRL |= GPIO_CRL_CNF4_0;
 		
+		GPIOA->CRH &= ~(GPIO_CRH_MODE15 | GPIO_CRH_CNF15);
 		GPIOA->CRH |= GPIO_CRH_MODE15;
-		GPIOA->CRH &= ~GPIO_CRH_CNF15;
-		GPIOB->CRL |= GPIO_CRL_MODE6;
-		GPIOB->CRL &= ~GPIO_CRL_CNF6;
+		
+		GPIOB->CRL &= ~(GPIO_CRL_MODE6 | GPIO_CRL_CNF6);
+		GPIOB->CRL |= GPIO_CRL_CNF6_0;
+		
 		GPIOB->CRL |= GPIO_CRL_MODE7;
 		GPIOB->CRL &= ~GPIO_CRL_CNF7;
 

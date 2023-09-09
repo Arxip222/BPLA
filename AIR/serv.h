@@ -2,7 +2,14 @@
 #define SERV_H
 
 #include "stm32f10x.h"
+#include <stdint.h>
 #include "RCC.h"
+#include "SPI.h"
+#include "PWM.h"
+#include "GPIO.h"
+#include "NVIC.h"
+#include "SX1278_hw.h"
+#include "SX1278.h"
 
 #define SYSLOCK 72000000U
 #define E1 GPIOB->BSRR = GPIO_BSRR_BS1
