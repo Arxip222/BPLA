@@ -10,6 +10,8 @@
 #include "NVIC.h"
 #include "SX1278_hw.h"
 #include "SX1278.h"
+#include <stdbool.h>
+#include <string.h>
 
 #define SYSLOCK 72000000U
 #define E1 GPIOB->BSRR = GPIO_BSRR_BS1

@@ -35,6 +35,7 @@ void SPI_TransmitReceiveData(uint8_t* tx_data, uint8_t* rx_data, uint16_t size) 
 
         rx_data[i] = SPI1->DR;
     }
+ while (SPI1->SR & SPI_SR_BSY);
 }
 
 void SPI_Transmit(uint8_t data) {

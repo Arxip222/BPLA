@@ -5,6 +5,8 @@ int main(void){
 	int master;
 	int ret;
 	char buffer[512];
+	int message = 0;
+	uint8_t message_length;
 	SX1278_t SX1278;
 	
 	PORTS_INIT();
@@ -12,8 +14,8 @@ int main(void){
 	SPI_INIT();
 	master = 0;
 	
-	SX1278_init(&SX1278, 434000000, SX1278_POWER_17DBM, SX1278_LORA_SF_6,
-	SX1278_LORA_BW_125KHZ, SX1278_LORA_CR_4_5, SX1278_LORA_CRC_DIS, 10);
+	SX1278_init(&SX1278, 434000000, SX1278_POWER_17DBM, SX1278_LORA_SF_7,
+	SX1278_LORA_BW_125KHZ, SX1278_LORA_CR_4_5, SX1278_LORA_CRC_EN, 10);
 	if (master == 1) {
 		ret = SX1278_LoRaEntryTx(&SX1278, 16, 2000);
 		GPIOC->BSRR = GPIO_BSRR_BR13;
@@ -24,11 +26,12 @@ int main(void){
 	
 	while (1) {
 		if (master == 1) {
-			char message[] = "Hello";
-      memcpy(buffer, message, sizeof(message));
-			ret = SX1278_LoRaEntryTx(&SX1278, sizeof(message), 2000);
+			message_length = sprintf(buffer, "Hello %d", message);
+			ret = SX1278_LoRaEntryTx(&SX1278, message_length, 2000);
 			
-			ret = SX1278_LoRaTxPacket(&SX1278, (uint8_t*) buffer, sizeof(message), 2000);
+			ret = SX1278_LoRaTxPacket(&SX1278, (uint8_t*) buffer, message_length, 2000);
+			
+			message += 1;
 		} else {
 			delay_ms(800);
 			ret = SX1278_LoRaRxPacket(&SX1278);

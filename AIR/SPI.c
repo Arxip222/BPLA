@@ -23,18 +23,19 @@ void SPI_INIT(void)
 		SPI1->CR2 &= ~SPI_CR2_TXEIE; //Tx interrupt disable
 	}
 
-void SPI_TransmitReceiveData(uint8_t* tx_data, uint8_t* rx_data, uint16_t size) {
-		uint16_t i;
-    for (i = 0; i < size; i++) {
-			
-        while ((SPI1->SR & SPI_SR_TXE) == 0);
+void SPI_TransmitReceive(uint8_t *pTxData, uint8_t *pRxData, uint16_t Size) {
+	uint16_t i;
+    for (i = 0; i < Size; i++) {
+        while (!(SPI1->SR & SPI_SR_TXE));
 
-			SPI1->DR = tx_data[i];
+        SPI1->DR = pTxData[i];
 
-        while ((SPI1->SR & SPI_SR_RXNE) == 0);
+        while (!(SPI1->SR & SPI_SR_RXNE));
 
-        rx_data[i] = SPI1->DR;
+        pRxData[i] = SPI1->DR;
     }
+
+    while (SPI1->SR & SPI_SR_BSY);
 }
 
 void SPI_Transmit(uint8_t data) {

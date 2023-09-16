@@ -37,7 +37,7 @@ uint8_t SX1278_hw_SPIReadByte(void) {
 		uint8_t rxByte = 0x00;
 
 		SX1278_hw_SetNSS(0);
-		SPI_TransmitReceiveData(&txByte, &rxByte, 1);
+		SPI_TransmitReceive(&txByte, &rxByte, 1);
 		return rxByte;
 }
 

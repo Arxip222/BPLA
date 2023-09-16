@@ -173,7 +173,7 @@ uint8_t SX1278_LoRaRxPacket(SX1278_t *module) {
 	return module->readBytes;
 }
 
-int SX1278_LoRaEntryTx(SX1278_t *module, uint8_t length, uint32_t timeout) {
+int 	SX1278_LoRaEntryTx(SX1278_t *module, uint8_t length, uint32_t timeout) {
 	uint8_t addr;
 	uint8_t temp;
 
