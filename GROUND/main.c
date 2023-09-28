@@ -3,7 +3,7 @@
 	{
 		int master;
 		int ret;
-		int message = 10;
+		int message = 1;
 		uint8_t message_length;
 		char buffer[512];
 		SX1278_t SX1278;
@@ -40,7 +40,7 @@
 			speed = adc_buffer[2];//Значение скорости
 			SPI_SEND(x);*/
 			if (master == 1) {
-			message_length = sprintf(buffer, "%d", message);
+			message_length = sprintf(buffer, "Hello %d", message);
 			ret = SX1278_LoRaEntryTx(&SX1278, message_length, 2000);
 			
 			ret = SX1278_LoRaTxPacket(&SX1278, (uint8_t*) buffer, message_length, 2000);

@@ -152,12 +152,19 @@ int SX1278_LoRaEntryRx(SX1278_t *module, uint8_t length, uint32_t timeout) {
 
 uint8_t SX1278_LoRaRxPacket(SX1278_t *module) {
 	unsigned char addr;
+	uint8_t addr1;
+	uint8_t addr2;
+	uint8_t addr3;
+	uint8_t addr4;
 	unsigned char packet_size;
 
 	if (SX1278_hw_GetDIO0()) {
 		memset(module->rxBuffer, 0x00, SX1278_MAX_PACKET);
 
 		addr = SX1278_SPIRead(LR_RegFifoRxCurrentaddr); //last packet addr
+		addr1 = SX1278_SPIRead(LR_RegFifoAddrPtr);
+		addr2 = SX1278_SPIRead(LR_RegFifoRxByteAddr);
+		addr4 = SX1278_SPIRead(LR_RegFifoRxBaseAddr);
 		SX1278_SPIWrite(LR_RegFifoAddrPtr, addr); //RxBaseAddr -> FiFoAddrPtr
 
 		if (module->LoRa_SF == SX1278_LORA_SF_6) { //When SpreadFactor is six,will used Implicit Header mode(Excluding internal packet length)
@@ -175,6 +182,8 @@ uint8_t SX1278_LoRaRxPacket(SX1278_t *module) {
 
 int SX1278_LoRaEntryTx(SX1278_t *module, uint8_t length, uint32_t timeout) {
 	uint8_t addr;
+	uint8_t addr1;
+	uint8_t addr2;
 	uint8_t temp;
 
 	module->packetLength = length;
@@ -187,8 +196,10 @@ int SX1278_LoRaEntryTx(SX1278_t *module, uint8_t length, uint32_t timeout) {
 	SX1278_SPIWrite(LR_RegIrqFlagsMask, 0xF7); //Open TxDone interrupt
 	SX1278_SPIWrite(LR_RegPayloadLength, length); //RegPayloadLength 21byte
 	addr = SX1278_SPIRead(LR_RegFifoTxBaseAddr); //RegFiFoTxBaseAddr
+	addr1 = SX1278_SPIRead(LR_RegPayloadLength);
+	addr2 = SX1278_SPIRead(LR_RegFifoAddrPtr);
 	SX1278_SPIWrite(LR_RegFifoAddrPtr, addr); //RegFifoAddrPtr
-
+	addr2 = SX1278_SPIRead(LR_RegFifoAddrPtr);
 	while (1) {
 		temp = SX1278_SPIRead(LR_RegPayloadLength);
 		if (temp == length) {
